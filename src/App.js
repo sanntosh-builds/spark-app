@@ -268,7 +268,7 @@ function Onboarding({ onDone }) {
 
 // ── DISCOVER SCREEN ───────────────────────────────────────────────────
 function Discover({ user }) {
-  const [idx, setIdx] = useState(0);
+ 
   const [liked, setLiked] = useState([]);
   const [passed, setPassed] = useState([]);
   const [toast, setToast] = useState(null);

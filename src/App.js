@@ -1,17 +1,18 @@
+import { supabase } from "./supabase";
 import { useState } from "react";
 
 // ── THEME ────────────────────────────────────────────────────────────
 const T = {
-  navy:    "#0D0F1A",
-  navy2:   "#161829",
-  card:    "#1A1D2E",
-  card2:   "#20243A",
-  coral:   "#FF4D6D",
-  gold:    "#FFD166",
-  lav:     "#C4B7E8",
-  muted:   "#6B6E8A",
-  white:   "#F5F0FF",
-  border:  "rgba(196,183,232,0.12)",
+  navy:    "#1C2033",
+  navy2:   "#252A42",
+  card:    "#2B3050",
+  card2:   "#343A5E",
+  coral:   "#FF6B85",
+  gold:    "#FFD874",
+  lav:     "#E0D8F5",
+  muted:   "#9B9FC4",
+  white:   "#FFFFFF",
+  border:  "rgba(224,216,245,0.22)",
 };
 
 const css = {
@@ -234,6 +235,26 @@ function Onboarding({ onDone }) {
     data.interests.length >= 3,
   ];
 
+  const handleFinish = async () => {
+    const { data: saved, error } = await supabase
+      .from('users')
+      .insert([{
+        name: data.name,
+        age: parseInt(data.age),
+        city: data.city,
+        mode: data.mode,
+        interests: data.interests,
+      }])
+      .select();
+
+    if (error) {
+      console.error("Error saving user:", error);
+      alert("Something went wrong saving your profile. Check console.");
+      return;
+    }
+
+    onDone({ ...data, id: saved[0].id });
+  };
   return (
     <div style={{ minHeight:"100vh", background:T.navy, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px 20px" }}>
       {/* progress */}
@@ -254,7 +275,7 @@ function Onboarding({ onDone }) {
         <div style={{ marginTop:32, display:"flex", gap:12 }}>
           {step > 0 && <Btn variant="ghost" onClick={() => setStep(s=>s-1)}>Back</Btn>}
           <Btn
-            onClick={() => step < steps.length-1 ? setStep(s=>s+1) : onDone(data)}
+            onClick={() => step < steps.length-1 ? setStep(s=>s+1) : handleFinish()}
             style={{ flex:1, justifyContent:"center" }}
             variant={canNext[step] ? "primary" : "soft"}
           >

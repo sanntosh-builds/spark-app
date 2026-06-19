@@ -3,16 +3,16 @@ import { useState } from "react";
 
 // ── THEME ────────────────────────────────────────────────────────────
 const T = {
-  navy:    "#1C2033",
-  navy2:   "#252A42",
-  card:    "#2B3050",
-  card2:   "#343A5E",
-  coral:   "#FF6B85",
-  gold:    "#FFD874",
-  lav:     "#E0D8F5",
-  muted:   "#9B9FC4",
-  white:   "#FFFFFF",
-  border:  "rgba(224,216,245,0.22)",
+  navy:    "#FFFFFF",
+  navy2:   "#F7F7FA",
+  card:    "#FFFFFF",
+  card2:   "#F1F1F5",
+  coral:   "#FE3C72",
+  gold:    "#FFB200",
+  lav:     "#424867",
+  muted:   "#9097A8",
+  white:   "#1C1C28",
+  border:  "rgba(28,28,40,0.10)",
 };
 
 const css = {
